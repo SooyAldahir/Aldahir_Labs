@@ -613,6 +613,14 @@ p { text-wrap: pretty; }
 .visual-carni { background: #f2e8d6; border-color: transparent; }
 .visual-carni > img { width: 44%; max-width: 360px; }
 
+/* EDI 301: su logo sobre el azul institucional */
+.visual-edi-logo { background: #07476f; border-color: transparent; }
+.visual-edi-logo > img { width: 44%; max-width: 360px; }
+
+/* Portada con captura real del producto */
+.visual-shot { background: var(--elevated); }
+.visual-shot > img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+
 /* multiApp: el gráfico destacado de la tienda */
 .visual-multi { background: #1f1832; }
 .visual-multi > img { width: 100%; height: 100%; object-fit: cover; }
@@ -936,6 +944,8 @@ p { text-wrap: pretty; }
   margin-bottom: 24px;
 }
 .cs-lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--silver); max-width: 40em; }
+.cs-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 32px; }
+.cs-actions-note { font-size: 14px; color: var(--muted); max-width: 34em; }
 .cs-meta {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -949,8 +959,11 @@ p { text-wrap: pretty; }
 
 .case-figure { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .case-figure .case-visual { border: 0; border-radius: 0; aspect-ratio: 21 / 9; }
-.case-figure .visual-carni { aspect-ratio: 21 / 8; }
-.case-figure .visual-carni > img { width: min(40%, 340px); }
+.case-figure .visual-carni,
+.case-figure .visual-edi-logo { aspect-ratio: 21 / 8; }
+.case-figure .visual-carni > img,
+.case-figure .visual-edi-logo > img { width: min(40%, 340px); }
+.case-figure .visual-shot { aspect-ratio: 1600 / 1005; }
 .case-figure .visual-multi { aspect-ratio: 1024 / 500; }
 
 .cs-body { display: grid; grid-template-columns: 3fr 9fr; gap: 48px; }
@@ -1029,21 +1042,24 @@ p { text-wrap: pretty; }
 .feature-list b .icon { width: 16px; height: 16px; color: var(--accent); }
 .feature-list span { display: block; font-size: 15px; color: var(--silver); }
 
-.evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-.evidence {
-  aspect-ratio: 9 / 16;
-  max-height: 380px;
-  border: 1px dashed var(--line-strong);
+.shots { display: grid; gap: 24px 20px; margin-top: 24px; }
+.shots-desktop { grid-template-columns: 1fr 1fr; }
+.shots-desktop .shot:first-child { grid-column: 1 / -1; }
+.shots-phone { grid-template-columns: repeat(4, 1fr); }
+.shots-phone.shots-3 { grid-template-columns: repeat(3, 1fr); max-width: 760px; }
+.shot a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius);
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 20px;
-  font-size: 13px;
-  color: var(--muted);
-  background: var(--chip-bg);
+  background: var(--elevated);
+  transition: border-color var(--t) var(--ease);
 }
-.evidence.wide { aspect-ratio: 16 / 10; }
+.shots-phone .shot a { border-radius: 22px; }
+.shot a:hover { border-color: var(--accent-line); }
+.shot img { width: 100%; height: auto; transition: scale 700ms var(--ease-expo); }
+.shot a:hover img { scale: 1.02; }
+.shot figcaption { margin-top: 10px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
 .pub-list { display: grid; gap: 0; margin-top: 24px; }
 .pub { display: flex; gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); }
@@ -1268,6 +1284,7 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: no-preference) {
   .cs-title { animation: title-in 1100ms var(--ease-expo) both; }
   .cs-lead { animation: fade-up 900ms var(--ease-expo) 200ms both; }
+  .cs-actions { animation: fade-up 900ms var(--ease-expo) 260ms both; }
   .cs-meta { animation: fade-up 900ms var(--ease-expo) 320ms both; }
 }
 
@@ -1353,7 +1370,8 @@ p { text-wrap: pretty; }
   .contact-card { border-radius: 16px; }
   .footer-top { flex-direction: column; align-items: flex-start; }
 
-  .evidence-grid { grid-template-columns: 1fr 1fr; }
+  .shots-desktop { grid-template-columns: 1fr; }
+  .shots-phone, .shots-phone.shots-3 { grid-template-columns: repeat(2, 1fr); }
   .next-case { padding: 22px; }
 }
 
