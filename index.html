@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Aldahir Labs — Aldahir Ballina · Ingeniero en Desarrollo de Software</title>
+  <meta name="description" content="Portafolio de Aldahir Ballina, Ingeniero en Desarrollo de Software. Aplicaciones móviles con Flutter, APIs REST con Node.js y ASP.NET Core, bases de datos y sistemas para negocio.">
+  <meta name="author" content="Aldahir Emmanuel Ballina Núñez">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta name="color-scheme" content="dark light">
+  <script>
+    // Tema: el elegido con el botón o, si no hay, el del sistema. Se aplica antes de pintar.
+    (() => {
+      let theme = null;
+      try { theme = localStorage.getItem("al-theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = theme;
+    })();
+    // Movimiento al leer: se activa antes de pintar y se desactiva si main.js no carga
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("motion");
+      setTimeout(() => { if (!window.__alMotion) document.documentElement.classList.remove("motion"); }, 2500);
+    }
+  </script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:site_name" content="Aldahir Labs">
+  <meta property="og:title" content="Aldahir Labs — Engineering ideas into reality">
+  <meta property="og:description" content="Aplicaciones móviles, APIs y sistemas que resuelven problemas reales.">
+  <meta property="og:image" content="assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="assets/brand/favicon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aldahir Emmanuel Ballina Núñez",
+    "jobTitle": "Ingeniero en Desarrollo de Software",
+    "alumniOf": "Universidad Linda Vista",
+    "email": "mailto:aldahirballina9@gmail.com",
+    "address": { "@type": "PostalAddress", "addressRegion": "Chiapas", "addressCountry": "MX" },
+    "sameAs": ["https://github.com/SooyAldahir"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <!-- ============ Navbar ============ -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand" aria-label="Aldahir Labs, inicio">
+        <span class="brand-mark"><img src="assets/brand/isotipo.webp" alt="" width="48" height="34"><svg class="brand-glint" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.3 5.7 11.4 12 12-6.3.6-11.4 5.7-12 12-.6-6.3-5.7-11.4-12-12C6.3 11.4 11.4 6.3 12 0z"/></svg></span>
+        <span class="brand-name">Aldahir <span>Labs</span></span>
+      </a>
+      <nav aria-label="Principal">
+        <ul class="nav-links">
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#stack">Tecnologías</a></li>
+          <li><a href="#trayectoria">Trayectoria</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar a modo claro"><svg class="icon icon-sun"><use href="assets/icons.svg#sun"/></svg><svg class="icon icon-moon"><use href="assets/icons.svg#moon"/></svg></button>
+        <a href="#contacto" class="btn btn-primary btn-sm nav-cta">Contactar</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="icon icon-lg"><use href="assets/icons.svg#menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a class="m-link" href="#proyectos">Proyectos <svg class="icon"><use href="assets/icons.svg#arrow-right"/></svg></a>
+    <a class="m-link" href="#servicios">Servicios <svg class="icon"><use href="assets/icons.svg#arrow-right"/></svg></a>
+    <a class="m-link" href="#stack">Tecnologías <svg class="icon"><use href="assets/icons.svg#arrow-right"/></svg></a>
+    <a class="m-link" href="#trayectoria">Trayectoria <svg class="icon"><use href="assets/icons.svg#arrow-right"/></svg></a>
+    <a class="m-link" href="#sobre-mi">Sobre mí <svg class="icon"><use href="assets/icons.svg#arrow-right"/></svg></a>
+    <a class="btn btn-primary" href="#contacto">Contactar <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="inicio">
+      <canvas class="node-net hero-net" aria-hidden="true"></canvas>
+      <div class="container">
+        <h1 class="hero-title">
+          Hola, soy Aldahir. <span class="dim">Construyo <span class="rotator" aria-hidden="true"><span class="rot-item is-current">soluciones digitales</span><span class="rot-item">aplicaciones móviles</span><span class="rot-item">APIs y servicios REST</span><span class="rot-item">sistemas para negocio</span></span><span class="sr-only">soluciones digitales</span> que resuelven</span> <span class="accent">problemas reales.</span>
+        </h1>
+
+        <div class="hero-row">
+          <div class="hero-intro">
+            <p class="hero-lead">
+              <strong>Ingeniero en Desarrollo de Software.</strong> Desarrollo aplicaciones móviles, APIs y sistemas combinando ingeniería, creatividad y tecnología, desde el modelado de datos hasta la interfaz final.
+            </p>
+            <div class="hero-actions">
+              <a href="#proyectos" class="btn btn-primary">Ver proyectos <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+              <a href="#contacto" class="btn btn-ghost">Contactarme</a>
+            </div>
+          </div>
+
+          <nav class="work-index" aria-label="Proyectos recientes">
+            <div class="work-index-head">
+              <span>Proyectos recientes</span>
+              <a href="#proyectos">Ver los 5</a>
+            </div>
+            <a class="idx-row" href="proyectos/carniapp.html" style="--i:0">
+              <span class="idx-thumb"><img src="assets/img/projects/carniapp-icon-160.webp" alt="" width="48" height="48"></span>
+              <span><span class="idx-name">CarniApp</span><span class="idx-desc">Punto de venta e inventario para una carnicería</span></span>
+              <span class="idx-meta">Cliente · 2026</span>
+              <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg>
+            </a>
+            <a class="idx-row" href="proyectos/multiapp.html" style="--i:1">
+              <span class="idx-thumb"><img src="assets/img/projects/multiapp-icon-160.webp" alt="" width="48" height="48"></span>
+              <span><span class="idx-name">multiApp</span><span class="idx-desc">Agenda, gastos, compras y salud con IA en una app</span></span>
+              <span class="idx-meta">Personal · 2026</span>
+              <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg>
+            </a>
+            <a class="idx-row" href="proyectos/edi-301.html" style="--i:2">
+              <span class="idx-thumb idx-mono" aria-hidden="true">EDI</span>
+              <span><span class="idx-name">Programa EDI 301</span><span class="idx-desc">App institucional publicada en Play Store y App Store</span></span>
+              <span class="idx-meta">Institucional · 2024–26</span>
+              <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Proyectos ============ -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2" data-reveal="title">Lo que he construido <span class="dim">y cómo lo resolví.</span></h2>
+          <p data-reveal="fade" style="--d:150ms">Tres casos de estudio con el problema, la solución, mi participación y las tecnologías, más dos proyectos personales.</p>
+        </div>
+
+        <div class="case-list">
+          <!-- CarniApp -->
+          <article class="case-row" data-reveal="case">
+            <a class="case-visual visual-carni" href="proyectos/carniapp.html" aria-label="Caso de estudio de CarniApp">
+              <img src="assets/img/projects/carniapp-icon-720.webp" alt="Ícono de CarniApp: silueta de una res dividida en cortes" width="720" height="720" loading="lazy">
+            </a>
+            <div class="case-body">
+              <div class="case-top">
+                <span class="case-kind">Cliente · 2026</span>
+                <span class="status">En desarrollo</span>
+              </div>
+              <h3 class="case-title"><a href="proyectos/carniapp.html">CarniApp</a></h3>
+              <p class="case-desc">Punto de venta para una carnicería: vende por peso, lleva el inventario por corte, reparte un animal entero en cortes, controla caja y crédito, e imprime tickets en la térmica.</p>
+              <div class="case-foot">
+                <div class="chips"><span class="chip">ASP.NET Core 8</span><span class="chip">Clean Architecture</span><span class="chip">SQL Server</span><span class="chip">Flutter</span></div>
+                <a class="link-arrow" href="proyectos/carniapp.html">Caso de estudio <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- multiApp -->
+          <article class="case-row" data-reveal="case">
+            <a class="case-visual visual-multi" href="proyectos/multiapp.html" aria-label="Caso de estudio de multiApp">
+              <img src="assets/img/projects/multiapp-feature.webp" alt="Gráfico de multiApp: cuatro bloques de colores y el lema Tu día completo en una sola app" width="1024" height="500" loading="lazy">
+            </a>
+            <div class="case-body">
+              <div class="case-top">
+                <span class="case-kind">Personal · 2026</span>
+                <span class="status">En desarrollo</span>
+              </div>
+              <h3 class="case-title"><a href="proyectos/multiapp.html">multiApp</a></h3>
+              <p class="case-desc">Agenda, notas, gastos, lista de compras y salud en una sola app móvil, con IA para recetas, rutinas de ejercicio, calorías por foto y “¿dónde compro?”.</p>
+              <div class="case-foot">
+                <div class="chips"><span class="chip">Flutter</span><span class="chip">Node.js</span><span class="chip">SQL Server</span><span class="chip">IA</span></div>
+                <a class="link-arrow" href="proyectos/multiapp.html">Caso de estudio <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- EDI 301 -->
+          <article class="case-row" data-reveal="case">
+            <a class="case-visual visual-edi" href="proyectos/edi-301.html" aria-label="Caso de estudio de la app del Programa EDI 301">
+              <div class="arch" role="img" aria-label="Arquitectura: aplicación Flutter conectada a una API REST en Node.js y Express, que se comunica con la base de datos">
+                <div class="arch-node"><svg class="icon"><use href="assets/icons.svg#smartphone"/></svg><b>App móvil</b><small>Flutter</small></div>
+                <span class="arch-link"></span>
+                <div class="arch-node"><svg class="icon"><use href="assets/icons.svg#server"/></svg><b>API REST</b><small>Node · Express</small></div>
+                <span class="arch-link"></span>
+                <div class="arch-node"><svg class="icon"><use href="assets/icons.svg#database"/></svg><b>Datos</b><small>Base de datos</small></div>
+              </div>
+            </a>
+            <div class="case-body">
+              <div class="case-top">
+                <span class="case-kind">Institucional · 2024 – 2026</span>
+                <span class="status is-done">Publicada</span>
+              </div>
+              <h3 class="case-title"><a href="proyectos/edi-301.html">App del Programa EDI 301</a></h3>
+              <p class="case-desc">App para la gestión de docentes y alumnos de la Universidad Linda Vista, publicada en Google Play y App Store, y base de una investigación presentada en dos congresos.</p>
+              <div class="case-foot">
+                <div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Node.js</span><span class="chip">Express</span></div>
+                <a class="link-arrow" href="proyectos/edi-301.html">Caso de estudio <svg class="icon"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="more">
+          <div class="more-head" data-reveal="fade">
+            <h3 class="h3">Otros proyectos</h3>
+            <p>Personales · Flutter</p>
+          </div>
+          <div class="more-row" data-reveal="line">
+            <h4 class="h3">Gestor de tareas</h4>
+            <p>Administración de tareas con persistencia local, navegación entre pantallas y gestión de estados.</p>
+            <div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span></div>
+            <span class="year">2025</span>
+          </div>
+          <div class="more-row" data-reveal="line">
+            <h4 class="h3">Control de gastos</h4>
+            <p>Registro y visualización de gastos personales, con almacenamiento local de la información.</p>
+            <div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span></div>
+            <span class="year">2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Servicios ============ -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2" data-reveal="title">Soluciones, <span class="dim">no solo tecnologías.</span></h2>
+          <p data-reveal="fade" style="--d:150ms">Una oferta enfocada en lo que ya he entregado. Cada servicio enlaza al proyecto que lo respalda.</p>
+        </div>
+
+        <div class="offers">
+          <div class="offer-row" data-reveal="line">
+            <h3 class="h3">Aplicaciones móviles</h3>
+            <p>Apps multiplataforma para Android e iOS, desde el diseño hasta la publicación en las tiendas.</p>
+            <p class="proof">En <a href="proyectos/edi-301.html">EDI 301</a> y <a href="proyectos/multiapp.html">multiApp</a></p>
+          </div>
+          <div class="offer-row" data-reveal="line">
+            <h3 class="h3">Backend y APIs REST</h3>
+            <p>Servicios, lógica de negocio, autenticación e integración de sistemas con Node.js y ASP.NET Core.</p>
+            <p class="proof">En <a href="proyectos/carniapp.html">CarniApp</a>, <a href="proyectos/multiapp.html">multiApp</a> y <a href="proyectos/edi-301.html">EDI 301</a></p>
+          </div>
+          <div class="offer-row" data-reveal="line">
+            <h3 class="h3">Bases de datos</h3>
+            <p>Modelado, consultas y estructura de datos en SQL Server, MySQL, PostgreSQL y MongoDB.</p>
+            <p class="proof">En <a href="proyectos/carniapp.html">CarniApp</a> y <a href="proyectos/multiapp.html">multiApp</a></p>
+          </div>
+          <div class="offer-row" data-reveal="line">
+            <h3 class="h3">Sistemas web y de escritorio</h3>
+            <p>Sistemas para negocio que corren en el navegador o en la computadora, con Flutter y Blazor.</p>
+            <p class="proof">En <a href="proyectos/carniapp.html">CarniApp</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Tecnologías ============ -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2" data-reveal="title">Mi stack <span class="dim">de trabajo.</span></h2>
+          <p data-reveal="fade" style="--d:150ms">Herramientas para llevar un proyecto desde la base de datos hasta la interfaz de usuario.</p>
+        </div>
+
+        <div class="stack-row" data-reveal="stack">
+          <h3>Lenguajes</h3>
+          <ul class="stack-items"><li class="core">Dart</li><li class="core">C#</li><li class="core">JavaScript</li><li>TypeScript</li><li>Python</li><li>SQL (T-SQL)</li><li>HTML5 y CSS3</li></ul>
+        </div>
+        <div class="stack-row" data-reveal="stack">
+          <h3>Frameworks</h3>
+          <ul class="stack-items"><li class="core">Flutter</li><li class="core">ASP.NET Core</li><li class="core">Node.js</li><li class="core">Express</li><li>Entity Framework</li><li>Blazor WebAssembly</li></ul>
+        </div>
+        <div class="stack-row" data-reveal="stack">
+          <h3>Bases de datos</h3>
+          <ul class="stack-items"><li class="core">SQL Server</li><li>MySQL</li><li>PostgreSQL</li><li>SQLite</li><li>Firebase</li><li>MongoDB</li></ul>
+        </div>
+        <div class="stack-row" data-reveal="stack">
+          <h3>Herramientas</h3>
+          <ul class="stack-items"><li class="core">Git y GitHub</li><li>GitHub Actions</li><li>Visual Studio</li><li>VS Code</li><li>Android Studio</li><li>Postman</li></ul>
+        </div>
+        <p class="stack-note"><i></i> Uso principal en mis proyectos</p>
+      </div>
+    </section>
+
+    <!-- ============ Trayectoria ============ -->
+    <section class="section" id="trayectoria">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2" data-reveal="title">Experiencia, investigación <span class="dim">y formación.</span></h2>
+          <p data-reveal="fade" style="--d:150ms"><a class="link-arrow" href="assets/docs/CV_Aldahir_Ballina.pdf" download>Descargar CV <svg class="icon"><use href="assets/icons.svg#download"/></svg></a></p>
+        </div>
+
+        <ol class="timeline">
+          <li class="tl-item" data-reveal="fade">
+            <div class="tl-date">2026</div>
+            <div class="tl-main">
+              <h3 class="h3">Desarrollador de CarniApp</h3>
+              <span class="tl-org">Proyecto para una carnicería</span>
+              <ul>
+                <li>API en ASP.NET Core 8 con Clean Architecture y app Flutter para escritorio, web y Android.</li>
+                <li>Punto de venta, inventario por corte, caja, crédito de clientes e impresión de tickets.</li>
+                <li>Pruebas automatizadas e integración continua con GitHub Actions.</li>
+              </ul>
+            </div>
+            <div class="tl-side">
+              <span class="tl-tag"><svg class="icon"><use href="assets/icons.svg#briefcase"/></svg>Proyecto para cliente</span>
+            </div>
+          </li>
+
+          <li class="tl-item" data-reveal="fade">
+            <div class="tl-date">2024 — 2026</div>
+            <div class="tl-main">
+              <h3 class="h3">Desarrollador de la app del Programa EDI 301</h3>
+              <span class="tl-org">Universidad Linda Vista</span>
+              <ul>
+                <li>App multiplataforma con Flutter para la gestión de docentes y alumnos.</li>
+                <li>API REST con Node.js y Express.</li>
+                <li>Diseño de la estructura de datos e integración entre frontend y backend.</li>
+                <li>Publicación en Google Play Store y App Store.</li>
+              </ul>
+            </div>
+            <div class="tl-side">
+              <span class="tl-tag"><svg class="icon"><use href="assets/icons.svg#briefcase"/></svg>Proyecto institucional</span>
+            </div>
+          </li>
+
+          <li class="tl-item" data-reveal="fade">
+            <div class="tl-date">2024 — 2026</div>
+            <div class="tl-main">
+              <h3 class="h3">Investigación y publicaciones</h3>
+              <span class="tl-org">“Aplicación móvil para la gestión del Programa EDI 301 en la Universidad Linda Vista”</span>
+              <ul>
+                <li>Ponente y coautor en las 11.ª Jornadas de Investigación UAP.</li>
+                <li>Ponente y coautor en el III Encuentro Internacional de Semilleros de Investigación de Universidades Latinoamericanas.</li>
+                <li>Cartel científico publicado en la Revista Ojtaquinel, Vol. 2.</li>
+              </ul>
+            </div>
+            <div class="tl-side">
+              <span class="tl-tag"><svg class="icon"><use href="assets/icons.svg#mic"/></svg>2 ponencias</span>
+              <span class="tl-tag"><svg class="icon"><use href="assets/icons.svg#book"/></svg>1 publicación</span>
+            </div>
+          </li>
+
+          <li class="tl-item" data-reveal="fade">
+            <div class="tl-date">2022 — 2026</div>
+            <div class="tl-main">
+              <h3 class="h3">Ingeniería en Desarrollo de Software</h3>
+              <span class="tl-org">Universidad Linda Vista</span>
+              <p>Formación en el ciclo completo de desarrollo de software: modelado de bases de datos, backend, desarrollo móvil y web, y buenas prácticas de ingeniería.</p>
+            </div>
+            <div class="tl-side">
+              <span class="tl-tag"><svg class="icon"><use href="assets/icons.svg#graduation"/></svg>Formación académica</span>
+            </div>
+          </li>
+
+          <li class="tl-item" data-reveal="fade">
+            <div class="tl-date">Certificaciones</div>
+            <div class="tl-main">
+              <h3 class="h3">Ecosistema .NET</h3>
+              <ul>
+                <li>APIs con .NET</li>
+                <li>Aplicaciones Web con Blazor WebAssembly y .NET</li>
+              </ul>
+            </div>
+            <div class="tl-side">
+              <span class="tl-tag"><svg class="icon"><use href="assets/icons.svg#award"/></svg>2 certificaciones</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ Sobre mí ============ -->
+    <section class="section" id="sobre-mi">
+      <div class="container about">
+        <figure class="about-photo" data-reveal="figure">
+          <img src="assets/img/aldahir-800.webp" srcset="assets/img/aldahir-480.webp 480w, assets/img/aldahir-800.webp 800w" sizes="(max-width: 900px) 320px, 380px" alt="Aldahir Ballina con traje oscuro, camisa blanca y corbata" width="800" height="1000" loading="lazy">
+        </figure>
+        <div class="about-copy">
+          <h2 class="h2" data-reveal="title">Ingeniería con propósito.</h2>
+          <p data-reveal="fade">Soy <strong>Aldahir Emmanuel Ballina Núñez</strong>, Ingeniero en Desarrollo de Software egresado de la Universidad Linda Vista. Diseño, desarrollo y publico aplicaciones multiplataforma con Flutter, y construyo APIs con Node.js, Express y el ecosistema .NET.</p>
+          <p data-reveal="fade" style="--d:80ms">He trabajado en proyectos que abarcan el ciclo completo del software, desde el modelado de la base de datos hasta la interfaz de usuario. Busco crear soluciones <strong>funcionales, mantenibles y orientadas a necesidades reales</strong>, aplicando buenas prácticas de desarrollo.</p>
+          <p data-reveal="fade" style="--d:160ms"><strong>Aldahir Labs</strong> es mi marca personal: el espacio donde reúno lo que construyo y las ideas que convierto en software.</p>
+          <div class="principle">
+            <p>Menos decoración, más contenido. Cada elemento debe tener una razón para estar ahí.</p>
+          </div>
+        </div>
+
+        <div class="about-side" data-reveal="list">
+          <div class="fact">
+            <div class="fact-label"><svg class="icon"><use href="assets/icons.svg#map-pin"/></svg>Ubicación</div>
+            <div class="fact-value">Chiapas, México<small>Zona horaria GMT-6</small></div>
+          </div>
+          <div class="fact">
+            <div class="fact-label"><svg class="icon"><use href="assets/icons.svg#graduation"/></svg>Formación</div>
+            <div class="fact-value">Ing. en Desarrollo de Software<small>Universidad Linda Vista</small></div>
+          </div>
+          <div class="fact">
+            <div class="fact-label"><svg class="icon"><use href="assets/icons.svg#globe"/></svg>Idiomas</div>
+            <div class="lang"><span>Español</span><span>Nativo</span></div>
+            <div class="lang"><span>Inglés</span><span>Básico</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Contacto ============ -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="contact-card" data-reveal="fade">
+          <canvas class="node-net contact-net" aria-hidden="true"></canvas>
+          <div class="contact-grid">
+            <div>
+              <h2 class="contact-title" data-reveal="title">¿Trabajamos<br><span class="dim">juntos?</span></h2>
+              <p class="contact-lead" data-reveal="fade" style="--d:150ms">Conversemos sobre tu próximo proyecto, una oportunidad laboral o una idea que quieras llevar a la realidad.</p>
+              <div class="hero-actions">
+                <a href="mailto:aldahirballina9@gmail.com" class="btn btn-primary">Escribirme <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg></a>
+                <button class="copy-btn" id="copyEmail" data-email="aldahirballina9@gmail.com" type="button">
+                  <svg class="icon"><use href="assets/icons.svg#copy"/></svg><span>Copiar correo</span>
+                </button>
+              </div>
+            </div>
+            <div class="contact-links" data-reveal="list">
+              <a class="contact-link" href="mailto:aldahirballina9@gmail.com">
+                <svg class="icon"><use href="assets/icons.svg#mail"/></svg>
+                <span class="cl-text"><span class="cl-label">Email</span><span class="cl-value">aldahirballina9@gmail.com</span></span>
+                <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg>
+              </a>
+              <a class="contact-link" href="https://github.com/SooyAldahir" target="_blank" rel="noopener">
+                <svg class="icon"><use href="assets/icons.svg#github"/></svg>
+                <span class="cl-text"><span class="cl-label">GitHub</span><span class="cl-value">@SooyAldahir</span></span>
+                <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg>
+              </a>
+              <a class="contact-link" href="https://wa.me/529613374186" target="_blank" rel="noopener">
+                <svg class="icon"><use href="assets/icons.svg#message"/></svg>
+                <span class="cl-text"><span class="cl-label">WhatsApp</span><span class="cl-value">+52 961 337 41 86</span></span>
+                <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg>
+              </a>
+              <a class="contact-link" href="assets/docs/CV_Aldahir_Ballina.pdf" download>
+                <svg class="icon"><use href="assets/icons.svg#download"/></svg>
+                <span class="cl-text"><span class="cl-label">Currículum</span><span class="cl-value">Descargar CV (PDF)</span></span>
+                <svg class="icon icon-arrow"><use href="assets/icons.svg#arrow-up-right"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <img src="assets/brand/logo-full.webp" alt="Aldahir Labs, Engineering ideas into reality" width="183" height="48" loading="lazy">
+        <nav class="footer-nav" aria-label="Pie de página">
+          <a href="#proyectos">Proyectos</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#stack">Tecnologías</a>
+          <a href="#trayectoria">Trayectoria</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>Aldahir Labs · Engineering ideas into reality</span>
+        <span>© <span data-year>2026</span> Aldahir Ballina</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

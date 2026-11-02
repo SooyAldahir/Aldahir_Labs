@@ -1,0 +1,56 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-02T06:14:03.618Z",
+        "reason": "La propuesta de diseño que compartió el usuario (enlace de ChatGPT) define Space Grotesk + Inter"
+      },
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-11-02T06:14:03.635Z",
+        "reason": "La propuesta de diseño que compartió el usuario (enlace de ChatGPT) define Space Grotesk + Inter"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-02T06:33:16.645Z",
+        "reason": "Falso positivo verificado en render: .section usa padding-block clamp(88px..144px) y .contact-card padding clamp(32px..80px)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "proyectos/carniapp.html"
+        ],
+        "createdAt": "2026-11-02T06:38:08.915Z",
+        "reason": "Falso positivo verificado en render: las celdas de .data-table tienen padding 14px 18px y .footer-slim .footer-bottom no tiene borde"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "proyectos/multiapp.html"
+        ],
+        "createdAt": "2026-11-02T06:38:08.930Z",
+        "reason": "Falso positivo verificado en render: las celdas de .data-table tienen padding 14px 18px y .footer-slim .footer-bottom no tiene borde"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "proyectos/edi-301.html"
+        ],
+        "createdAt": "2026-11-02T06:38:08.945Z",
+        "reason": "Falso positivo verificado en render: las celdas de .data-table tienen padding 14px 18px y .footer-slim .footer-bottom no tiene borde"
+      }
+    ]
+  }
+}

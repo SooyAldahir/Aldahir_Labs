@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>multiApp — Caso de estudio · Aldahir Labs</title>
+  <meta name="description" content="Caso de estudio: app móvil en Flutter que reúne agenda, notas, pendientes, gastos, compras y salud, con IA y una API en Node.js, Express y SQL Server.">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta name="color-scheme" content="dark light">
+  <script>
+    // Tema: el elegido con el botón o, si no hay, el del sistema. Se aplica antes de pintar.
+    (() => {
+      let theme = null;
+      try { theme = localStorage.getItem("al-theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = theme;
+    })();
+    // Movimiento al leer: se activa antes de pintar y se desactiva si main.js no carga
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("motion");
+      setTimeout(() => { if (!window.__alMotion) document.documentElement.classList.remove("motion"); }, 2500);
+    }
+  </script>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aldahir Labs">
+  <meta property="og:title" content="multiApp — Caso de estudio">
+  <meta property="og:description" content="Tu día completo en una sola app. Flutter + Node.js + SQL Server + IA.">
+  <meta property="og:image" content="../assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../assets/brand/favicon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="read-progress" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="brand" aria-label="Aldahir Labs, inicio">
+        <span class="brand-mark"><img src="../assets/brand/isotipo.webp" alt="" width="48" height="34"><svg class="brand-glint" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.3 5.7 11.4 12 12-6.3.6-11.4 5.7-12 12-.6-6.3-5.7-11.4-12-12C6.3 11.4 11.4 6.3 12 0z"/></svg></span>
+        <span class="brand-name">Aldahir <span>Labs</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar a modo claro"><svg class="icon icon-sun"><use href="../assets/icons.svg#sun"/></svg><svg class="icon icon-moon"><use href="../assets/icons.svg#moon"/></svg></button>
+        <a href="../index.html#contacto" class="btn btn-primary btn-sm">Contactar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Ruta">
+          <a href="../index.html#proyectos"><svg class="icon"><use href="../assets/icons.svg#arrow-left"/></svg>Proyectos</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">multiApp</span>
+        </nav>
+        <h1 class="cs-title">multiApp: tu día completo en una sola app</h1>
+        <p class="cs-lead">Una app móvil que reúne agenda, notas, pendientes, gastos, lista de compras, lugares y salud, con funciones de IA en las tareas que más tiempo quitan.</p>
+        <dl class="cs-meta">
+          <div><dt>Periodo</dt><dd>2026</dd></div>
+          <div><dt>Tipo</dt><dd>Proyecto personal</dd></div>
+          <div><dt>Plataformas</dt><dd>iOS · Android</dd></div>
+          <div><dt>Estado</dt><dd><span class="status">En desarrollo</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="container">
+      <figure class="case-figure" data-reveal="figure">
+        <div class="case-visual visual-multi">
+          <img src="../assets/img/projects/multiapp-feature.webp" alt="Gráfico de multiApp: cuatro bloques de colores y el lema Tu día completo en una sola app" width="1024" height="500">
+        </div>
+      </figure>
+    </div>
+
+    <section class="section">
+      <div class="container cs-body">
+        <nav class="cs-toc" aria-label="Contenido del caso">
+          <a href="#problema">Problema</a>
+          <a href="#solucion">Solución</a>
+          <a href="#ia">IA</a>
+          <a href="#arquitectura">Arquitectura</a>
+          <a href="#backend">Backend</a>
+          <a href="#participacion">Mi participación</a>
+          <a href="#evidencias">Evidencias</a>
+        </nav>
+
+        <div>
+          <article class="cs-section" id="problema">
+            <h2 data-reveal="title">Demasiadas apps <span class="dim">para un solo día.</span></h2>
+            <p>La agenda en una app, las notas en otra, los gastos en una hoja de cálculo y la lista del súper en un papel. multiApp reúne lo cotidiano en un solo lugar, con una pantalla de inicio que resume lo que importa hoy.</p>
+          </article>
+
+          <article class="cs-section" id="solucion">
+            <h2 data-reveal="title">Mini apps <span class="dim">sobre una base común.</span></h2>
+            <p>Cada módulo es una mini app con su propia pantalla, pero todas comparten sesión, diseño, notificaciones y un botón central para crear rápido una tarea, evento, nota, gasto, compra, receta, comida o entrenamiento.</p>
+            <ul class="feature-list" data-reveal="list">
+              <li><b><svg class="icon"><use href="../assets/icons.svg#check-circle"/></svg>Agenda, notas y pendientes</b><span>Eventos y tareas del día en Inicio, con recordatorios locales que funcionan sin internet.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#briefcase"/></svg>Gastos y presupuesto</b><span>Total del mes, desglose por categoría, periodos con límites, alertas al 80 % y apartados de ahorro.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#store"/></svg>Lista de compras</b><span>Agregar rápido con cantidad, marcar lo que ya está en el carrito y recibir los ingredientes de una receta.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#map"/></svg>Lugares</b><span>Casa, trabajo o iglesia guardados en el mapa, con ruta en Google Maps, Waze o Apple Maps.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#award"/></svg>Ejercicio</b><span>Modo entrenamiento con series, temporizador de descanso e historial que se agrega a la Agenda.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#bell"/></svg>Notificaciones</b><span>Push con Firebase y un resumen del día cada mañana, a la hora y en la zona horaria de cada usuario.</span></li>
+            </ul>
+          </article>
+
+          <article class="cs-section" id="ia">
+            <h2 data-reveal="title">IA donde <span class="dim">ahorra tiempo.</span></h2>
+            <ul class="feature-list" data-reveal="list">
+              <li><b><svg class="icon"><use href="../assets/icons.svg#sparkles"/></svg>Recetario</b><span>Genera recetas a partir de una idea, manda sus ingredientes a la lista y registra la comida con “Lo comí”.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#sparkles"/></svg>¿Dónde compro?</b><span>Agrupa lo pendiente por tipo de tienda (súper, farmacia, ferretería) y muestra las más cercanas en el mapa.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#sparkles"/></svg>Rutina del día</b><span>Arma el entrenamiento según el objetivo, nivel, equipo y lesiones, y lo entrenado en la semana. Cada ejercicio trae su tutorial.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#sparkles"/></svg>Calorías por foto</b><span>Estima calorías y macros describiendo la comida o con una foto, analizada con un modelo de visión. La foto no se guarda.</span></li>
+            </ul>
+            <p class="follow">La IA está detrás de un servicio con formato compatible con OpenAI. Por defecto usa Groq, y cambiar a Gemini, OpenAI u Ollama es cuestión de tres variables de entorno. Las rutinas y calorías se presentan como estimaciones, no como consejo profesional.</p>
+          </article>
+
+          <article class="cs-section" id="arquitectura">
+            <h2 data-reveal="title">Arquitectura.</h2>
+            <div class="case-figure arch-figure" data-reveal="figure">
+              <div class="case-visual visual-edi">
+                <div class="arch" role="img" aria-label="App Flutter conectada a una API en Express, que guarda en SQL Server">
+                  <div class="arch-node"><svg class="icon"><use href="../assets/icons.svg#smartphone"/></svg><b>App móvil</b><small>Flutter</small></div>
+                  <span class="arch-link"></span>
+                  <div class="arch-node"><svg class="icon"><use href="../assets/icons.svg#server"/></svg><b>API REST</b><small>Node · Express</small></div>
+                  <span class="arch-link"></span>
+                  <div class="arch-node"><svg class="icon"><use href="../assets/icons.svg#database"/></svg><b>Datos</b><small>SQL Server</small></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-wrap" data-reveal="fade">
+              <table class="data-table">
+                <thead><tr><th>Servicio externo</th><th>Para qué</th></tr></thead>
+                <tbody>
+                  <tr><td>Groq</td><td>IA de texto y de visión (recetas, rutinas, calorías, compras)</td></tr>
+                  <tr><td>OpenStreetMap</td><td>Mapas con <code>flutter_map</code>, direcciones con Nominatim y tiendas cercanas con Overpass, sin clave ni costo</td></tr>
+                  <tr><td>Firebase Cloud Messaging</td><td>Notificaciones push y resumen diario</td></tr>
+                  <tr><td>Cloudinary</td><td>Foto de perfil, recortada a la cara en 256 × 256</td></tr>
+                  <tr><td>Google y Apple</td><td>Inicio de sesión con cuenta existente</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="cs-section" id="backend">
+            <h2 data-reveal="title">Un backend <span class="dim">pensado para crecer.</span></h2>
+            <ul class="points" data-reveal="list">
+              <li><span><strong>Datos aislados por usuario.</strong> Una fábrica CRUD reutilizable filtra siempre por <code>UserId</code>, así que agregar un módulo nuevo son cuatro pasos.</span></li>
+              <li><span><strong>Validación por lista blanca</strong> de campos en cada módulo, autenticación con JWT y middlewares de seguridad.</span></li>
+              <li><span><strong>Respeto a los servicios gratuitos.</strong> Las búsquedas a Nominatim se espacian a una por segundo y se guardan en caché 10 minutos.</span></li>
+              <li><span><strong>Listo para tiendas.</strong> Páginas públicas de privacidad, términos, soporte y eliminación de cuenta, como exigen App Store y Google Play.</span></li>
+            </ul>
+            <p class="follow">Ejemplos de endpoints: <code>POST /api/shopping/where-to-buy</code>, <code>POST /api/workouts/generate</code> y <code>POST /api/nutrition/estimate-photo</code>.</p>
+          </article>
+
+          <article class="cs-section" id="participacion">
+            <h2 data-reveal="title">Mi participación.</h2>
+            <ul class="points" data-reveal="list">
+              <li>Diseño y desarrollo de la app en Flutter a partir de un mockup en Figma.</li>
+              <li>API REST con Node.js, Express y SQL Server, con migraciones y pruebas con <code>node:test</code>.</li>
+              <li>Integración de IA, mapas, notificaciones push, almacenamiento de imágenes e inicio de sesión con Google y Apple.</li>
+              <li>Preparación para publicar en App Store y Google Play.</li>
+            </ul>
+            <div class="chips cs-chips">
+              <span class="chip">Dart</span><span class="chip">Flutter</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">SQL Server</span><span class="chip">JWT</span><span class="chip">Groq</span><span class="chip">OpenStreetMap</span><span class="chip">Firebase</span><span class="chip">Cloudinary</span>
+            </div>
+          </article>
+
+          <article class="cs-section" id="evidencias">
+            <h2 data-reveal="title">Capturas.</h2>
+            <!-- TODO: reemplaza estos marcadores por capturas reales (<img src="../assets/img/projects/multiapp-inicio.webp" alt="...">). -->
+            <div class="evidence-grid" data-reveal="list">
+              <div class="evidence">Inicio<br>próximamente</div>
+              <div class="evidence">Gastos<br>próximamente</div>
+              <div class="evidence">¿Dónde compro?<br>próximamente</div>
+            </div>
+          </article>
+
+          <a data-reveal="fade" class="next-case" href="edi-301.html">
+            <span><small>Siguiente proyecto</small><b>App del Programa EDI 301</b></span>
+            <svg class="icon"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer footer-slim">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Aldahir Labs · Engineering ideas into reality</span>
+        <span>© <span data-year>2026</span> Aldahir Ballina</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
