@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>App Programa EDI 301 — Caso de estudio · Aldahir Labs</title>
+  <meta name="description" content="Caso de estudio: aplicación móvil multiplataforma con Flutter y API REST en Node.js para la gestión del Programa EDI 301 en la Universidad Linda Vista.">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta name="color-scheme" content="dark light">
+  <script>
+    // Tema: el elegido con el botón o, si no hay, el del sistema. Se aplica antes de pintar.
+    (() => {
+      let theme = null;
+      try { theme = localStorage.getItem("al-theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = theme;
+    })();
+    // Movimiento al leer: se activa antes de pintar y se desactiva si main.js no carga
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("motion");
+      setTimeout(() => { if (!window.__alMotion) document.documentElement.classList.remove("motion"); }, 2500);
+    }
+  </script>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aldahir Labs">
+  <meta property="og:title" content="App Programa EDI 301 — Caso de estudio">
+  <meta property="og:description" content="Flutter + Node.js/Express · Publicada en Google Play y App Store.">
+  <meta property="og:image" content="../assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../assets/brand/favicon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="read-progress" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="brand" aria-label="Aldahir Labs, inicio">
+        <span class="brand-mark"><img src="../assets/brand/isotipo.webp" alt="" width="48" height="34"><svg class="brand-glint" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.3 5.7 11.4 12 12-6.3.6-11.4 5.7-12 12-.6-6.3-5.7-11.4-12-12C6.3 11.4 11.4 6.3 12 0z"/></svg></span>
+        <span class="brand-name">Aldahir <span>Labs</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar a modo claro"><svg class="icon icon-sun"><use href="../assets/icons.svg#sun"/></svg><svg class="icon icon-moon"><use href="../assets/icons.svg#moon"/></svg></button>
+        <a href="../index.html#contacto" class="btn btn-primary btn-sm">Contactar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Ruta">
+          <a href="../index.html#proyectos"><svg class="icon"><use href="../assets/icons.svg#arrow-left"/></svg>Proyectos</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">EDI 301</span>
+        </nav>
+        <h1 class="cs-title">Aplicación móvil para el Programa EDI 301</h1>
+        <p class="cs-lead">Una app multiplataforma para la gestión institucional de docentes y alumnos en la Universidad Linda Vista, respaldada por una API REST propia y publicada en las tiendas oficiales.</p>
+        <dl class="cs-meta">
+          <div><dt>Periodo</dt><dd>2024 — 2026</dd></div>
+          <div><dt>Tipo</dt><dd>Institucional</dd></div>
+          <div><dt>Plataformas</dt><dd>Android · iOS</dd></div>
+          <div><dt>Estado</dt><dd><span class="status is-done">Publicada</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="container">
+      <figure class="case-figure" data-reveal="figure">
+        <div class="case-visual visual-edi">
+          <div class="arch" role="img" aria-label="Aplicación Flutter conectada a una API REST en Node.js y Express, que se comunica con la base de datos">
+            <div class="arch-node"><svg class="icon"><use href="../assets/icons.svg#smartphone"/></svg><b>App móvil</b><small>Flutter</small></div>
+            <span class="arch-link"></span>
+            <div class="arch-node"><svg class="icon"><use href="../assets/icons.svg#server"/></svg><b>API REST</b><small>Node · Express</small></div>
+            <span class="arch-link"></span>
+            <div class="arch-node"><svg class="icon"><use href="../assets/icons.svg#database"/></svg><b>Datos</b><small>Base de datos</small></div>
+          </div>
+          <span class="platforms"><span>Google Play</span><span>App Store</span></span>
+        </div>
+      </figure>
+    </div>
+
+    <section class="section">
+      <div class="container cs-body">
+        <nav class="cs-toc" aria-label="Contenido del caso">
+          <a href="#problema">Problema</a>
+          <a href="#solucion">Solución</a>
+          <a href="#participacion">Mi participación</a>
+          <a href="#resultados">Resultados</a>
+          <a href="#evidencias">Evidencias</a>
+        </nav>
+
+        <div>
+          <article class="cs-section" id="problema">
+            <h2 data-reveal="title">¿Qué necesidad buscaba resolver?</h2>
+            <p>El Programa EDI 301 de la Universidad Linda Vista necesitaba una forma práctica de gestionar la información institucional de docentes y alumnos, accesible desde el teléfono y disponible en ambos sistemas operativos.</p>
+            <!-- TODO: amplía aquí el contexto del problema (procesos manuales, usuarios involucrados, etc.) -->
+          </article>
+
+          <article class="cs-section" id="solucion">
+            <h2 data-reveal="title">Una app multiplataforma <span class="dim">con backend propio.</span></h2>
+            <p>Una aplicación móvil con Flutter, con un único código base para Android e iOS, conectada a una API REST en Node.js y Express que centraliza la comunicación con la base de datos.</p>
+          </article>
+
+          <article class="cs-section" id="participacion">
+            <h2 data-reveal="title">Del modelo de datos <span class="dim">a la tienda.</span></h2>
+            <ul class="points" data-reveal="list">
+              <li>Diseño y desarrollo de la aplicación móvil multiplataforma con Flutter.</li>
+              <li>Implementación de la API REST con Node.js y Express para la comunicación entre la app y la base de datos.</li>
+              <li>Participación en el diseño de la estructura de datos y en la integración entre frontend y backend.</li>
+              <li>Publicación de la aplicación en Google Play Store y App Store.</li>
+            </ul>
+            <div class="chips cs-chips">
+              <span class="chip">Dart</span><span class="chip">Flutter</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">REST API</span><span class="chip">Git y GitHub</span><span class="chip">Postman</span>
+            </div>
+          </article>
+
+          <article class="cs-section" id="resultados">
+            <h2 data-reveal="title">Publicada <span class="dim">e investigada.</span></h2>
+            <p>La aplicación se publicó en Google Play Store y App Store, y se convirtió en la base de una investigación presentada en congresos científicos y de una publicación universitaria.</p>
+            <div class="pub-list" data-reveal="list">
+              <div class="pub"><svg class="icon"><use href="../assets/icons.svg#mic"/></svg><div><b>11.ª Jornadas de Investigación UAP</b><span>Ponente y coautor</span></div></div>
+              <div class="pub"><svg class="icon"><use href="../assets/icons.svg#mic"/></svg><div><b>III Encuentro Internacional de Semilleros de Investigación de Universidades Latinoamericanas</b><span>Ponente y coautor</span></div></div>
+              <div class="pub"><svg class="icon"><use href="../assets/icons.svg#book"/></svg><div><b>Revista Ojtaquinel, Vol. 2</b><span>Cartel científico: “Avance de investigación: Aplicación móvil para la gestión del Programa EDI 301 en la Universidad Linda Vista”</span></div></div>
+            </div>
+          </article>
+
+          <article class="cs-section" id="evidencias">
+            <h2 data-reveal="title">Capturas y enlaces.</h2>
+            <p>Se mostrará únicamente información autorizada por la institución.</p>
+            <!-- TODO: reemplaza estos marcadores por capturas reales (<img src="../assets/img/projects/edi-1.webp" alt="...">) y añade los enlaces a las tiendas. -->
+            <div class="evidence-grid" data-reveal="list">
+              <div class="evidence">Captura 01<br>próximamente</div>
+              <div class="evidence">Captura 02<br>próximamente</div>
+              <div class="evidence">Captura 03<br>próximamente</div>
+            </div>
+          </article>
+
+          <a data-reveal="fade" class="next-case" href="carniapp.html">
+            <span><small>Siguiente proyecto</small><b>CarniApp</b></span>
+            <svg class="icon"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer footer-slim">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Aldahir Labs · Engineering ideas into reality</span>
+        <span>© <span data-year>2026</span> Aldahir Ballina</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

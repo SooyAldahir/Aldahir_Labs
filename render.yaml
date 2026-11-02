@@ -1,0 +1,26 @@
+# Render Blueprint — Aldahir Labs
+# Sitio estático (HTML, CSS y JS sin compilación) servido desde la raíz del repositorio.
+services:
+  - type: web
+    name: aldahir-labs
+    runtime: static
+    buildCommand: echo "Sitio estático, no requiere compilación"
+    staticPublishPath: .
+    headers:
+      # Seguridad básica
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      # Imágenes y logos: caché de una semana (los nombres de archivo no llevan versión)
+      - path: /assets/img/*
+        name: Cache-Control
+        value: public, max-age=604800
+      - path: /assets/brand/*
+        name: Cache-Control
+        value: public, max-age=604800

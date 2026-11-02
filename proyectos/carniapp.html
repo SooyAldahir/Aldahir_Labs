@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CarniApp — Caso de estudio · Aldahir Labs</title>
+  <meta name="description" content="Caso de estudio: sistema de administración y punto de venta para una carnicería, con API en ASP.NET Core 8 (Clean Architecture) y app Flutter para escritorio, web y Android.">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta name="color-scheme" content="dark light">
+  <script>
+    // Tema: el elegido con el botón o, si no hay, el del sistema. Se aplica antes de pintar.
+    (() => {
+      let theme = null;
+      try { theme = localStorage.getItem("al-theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = theme;
+    })();
+    // Movimiento al leer: se activa antes de pintar y se desactiva si main.js no carga
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("motion");
+      setTimeout(() => { if (!window.__alMotion) document.documentElement.classList.remove("motion"); }, 2500);
+    }
+  </script>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aldahir Labs">
+  <meta property="og:title" content="CarniApp — Caso de estudio">
+  <meta property="og:description" content="Punto de venta, inventario por corte, caja y crédito para una carnicería. ASP.NET Core 8 + Flutter.">
+  <meta property="og:image" content="../assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../assets/brand/favicon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="read-progress" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="brand" aria-label="Aldahir Labs, inicio">
+        <span class="brand-mark"><img src="../assets/brand/isotipo.webp" alt="" width="48" height="34"><svg class="brand-glint" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.3 5.7 11.4 12 12-6.3.6-11.4 5.7-12 12-.6-6.3-5.7-11.4-12-12C6.3 11.4 11.4 6.3 12 0z"/></svg></span>
+        <span class="brand-name">Aldahir <span>Labs</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar a modo claro"><svg class="icon icon-sun"><use href="../assets/icons.svg#sun"/></svg><svg class="icon icon-moon"><use href="../assets/icons.svg#moon"/></svg></button>
+        <a href="../index.html#contacto" class="btn btn-primary btn-sm">Contactar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cs-hero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Ruta">
+          <a href="../index.html#proyectos"><svg class="icon"><use href="../assets/icons.svg#arrow-left"/></svg>Proyectos</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">CarniApp</span>
+        </nav>
+        <h1 class="cs-title">CarniApp: el punto de venta de una carnicería</h1>
+        <p class="cs-lead">Un sistema de administración que vende por peso, lleva el inventario por corte, reparte un animal entero en cortes, controla la caja y el crédito de los clientes, e imprime el ticket en la impresora térmica.</p>
+        <dl class="cs-meta">
+          <div><dt>Periodo</dt><dd>2026</dd></div>
+          <div><dt>Tipo</dt><dd>Proyecto para cliente</dd></div>
+          <div><dt>Plataformas</dt><dd>macOS · Windows · Linux · Web · Android</dd></div>
+          <div><dt>Estado</dt><dd><span class="status">En desarrollo</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="container">
+      <figure class="case-figure" data-reveal="figure">
+        <div class="case-visual visual-carni">
+          <img src="../assets/img/projects/carniapp-icon-720.webp" alt="Ícono de CarniApp: silueta de una res dividida en cortes" width="720" height="720">
+        </div>
+      </figure>
+    </div>
+
+    <section class="section">
+      <div class="container cs-body">
+        <nav class="cs-toc" aria-label="Contenido del caso">
+          <a href="#problema">Problema</a>
+          <a href="#solucion">Solución</a>
+          <a href="#arquitectura">Arquitectura</a>
+          <a href="#seguridad">Seguridad</a>
+          <a href="#hardware">Hardware</a>
+          <a href="#calidad">Pruebas</a>
+          <a href="#participacion">Mi participación</a>
+          <a href="#evidencias">Evidencias</a>
+        </nav>
+
+        <div>
+          <article class="cs-section" id="problema">
+            <h2 data-reveal="title">Una carnicería no vende piezas: <span class="dim">vende kilos.</span></h2>
+            <p>El producto se vende por peso, llega como animal entero y muchas veces se fía a clientes de confianza. Con una libreta o un punto de venta genérico es difícil saber cuánto queda de cada corte, cuánto debe cada cliente y si la caja cuadra al cerrar el turno.</p>
+            <!-- TODO: ajusta este párrafo con el contexto real del cliente (sin nombrarlo si no está autorizado). -->
+          </article>
+
+          <article class="cs-section" id="solucion">
+            <h2 data-reveal="title">Un sistema hecho para el mostrador.</h2>
+            <p>Una API en ASP.NET Core 8 con SQL Server y una aplicación Flutter que corre en escritorio, web y Android. La barra lateral solo muestra los módulos que los permisos de cada usuario permiten.</p>
+            <ul class="feature-list" data-reveal="list">
+              <li><b><svg class="icon"><use href="../assets/icons.svg#layers"/></svg>Venta Fácil</b><span>Registra un animal (tipo, peso y costo), estima el reparto por corte y lo mete al inventario. Con el tiempo aprende los rendimientos reales.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#app-window"/></svg>Punto de venta</b><span>Hasta 8 ventas abiertas en pestañas, búsqueda por nombre o código de barras y cobro mixto: efectivo, tarjeta, transferencia y crédito.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#briefcase"/></svg>Caja y corte</b><span>Apertura de turno, gastos y retiros, aviso al llegar a la meta de efectivo, cierre con diferencia, historial y reapertura.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#users"/></svg>Clientes y crédito</b><span>Saldo y abonos por cliente, que se encuentra por nombre o por los últimos 4 dígitos de su teléfono.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#database"/></svg>Inventario</b><span>Existencias por corte, kardex de movimientos, ajustes manuales y aviso de existencias bajas.</span></li>
+              <li><b><svg class="icon"><use href="../assets/icons.svg#shield"/></svg>Usuarios y permisos</b><span>Roles propios con los permisos que el dueño elija, restablecer contraseñas y desbloquear cuentas.</span></li>
+            </ul>
+          </article>
+
+          <article class="cs-section" id="arquitectura">
+            <h2 data-reveal="title">Clean Architecture, <span class="dim">de afuera hacia adentro.</span></h2>
+            <p>La API está dividida en cuatro proyectos y las dependencias apuntan hacia el dominio. Las reglas del negocio no saben nada de la base de datos ni de HTTP.</p>
+            <div class="layers" data-reveal="layers" role="list" aria-label="Capas de la API">
+              <div class="layer" role="listitem"><b>CarniApp.Api</b><span>Controladores, JWT, autorización por permisos y Swagger</span></div>
+              <div class="layer" role="listitem"><b>CarniApp.Infrastructure</b><span>EF Core con SQL Server, repositorios, UnitOfWork y BCrypt</span></div>
+              <div class="layer" role="listitem"><b>CarniApp.Application</b><span>Casos de uso por módulo, DTOs y reglas del negocio</span></div>
+              <div class="layer" role="listitem"><b>CarniApp.Domain</b><span>Entidades: venta, corte, lote de animal, cliente, usuario, rol</span></div>
+            </div>
+            <p class="layers-note">Cada capa depende solo de las que están más adentro; el dominio no depende de nada.</p>
+            <p class="follow">La base de datos no usa migraciones de EF: el esquema vive en scripts T-SQL escritos a mano e idempotentes. Una prueba, <code>SchemaContractTests</code>, falla si una entidad usa una columna que los scripts no crean.</p>
+          </article>
+
+          <article class="cs-section" id="seguridad">
+            <h2 data-reveal="title">Seguridad que se comprueba <span class="dim">con pruebas.</span></h2>
+            <ul class="points" data-reveal="list">
+              <li><span><strong>Sesión.</strong> Token de acceso JWT de 20 minutos y token de renovación que rota en cada uso. Si alguien presenta uno ya usado, se cierran todas las sesiones de esa persona.</span></li>
+              <li><span><strong>Contraseñas.</strong> Hash con BCrypt; 5 intentos fallidos bloquean la cuenta 15 minutos.</span></li>
+              <li><span><strong>Permisos por endpoint.</strong> Cada escritura exige un permiso, por ejemplo <code>pos.vender</code> o <code>caja.cortar</code>. La prueba <code>ContratoApiTests</code> falla si algún endpoint queda sin protección.</span></li>
+              <li><span><strong>Sin pasos olvidados.</strong> Al arrancar, la API crea los permisos nuevos que exige el código y se los asigna al Super Administrador.</span></li>
+            </ul>
+          </article>
+
+          <article class="cs-section" id="hardware">
+            <h2 data-reveal="title">Del mostrador <span class="dim">a la impresora térmica.</span></h2>
+            <p>El ticket se envía en ESC/POS a impresoras de 58 u 80 mm, con el logo del negocio. El cajón se abre al cobrar en efectivo y el lector de código de barras funciona como teclado.</p>
+            <div class="table-wrap" data-reveal="fade">
+              <table class="data-table">
+                <thead><tr><th>Conexión</th><th>Disponible en</th></tr></thead>
+                <tbody>
+                  <tr><td>Red (IP, puerto 9100)</td><td>Todas las plataformas menos la web</td></tr>
+                  <tr><td>Bluetooth</td><td>Android y Windows</td></tr>
+                  <tr><td>USB</td><td>Android, con cable OTG</td></tr>
+                  <tr><td>Cola del sistema</td><td>macOS, Linux y Windows</td></tr>
+                  <tr><td>Navegador</td><td>Web, con el diálogo de impresión</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="cs-section" id="calidad">
+            <h2 data-reveal="title">Pruebas y entrega continua.</h2>
+            <ul class="points" data-reveal="list">
+              <li>Pruebas con xUnit sobre SQLite en memoria, sin necesidad de SQL Server.</li>
+              <li>Una prueba recorre un día completo de operación: caja, lotes, ventas, abono, gasto, anulación y corte.</li>
+              <li>En la app, pruebas de cada módulo, de la barra lateral por permisos, del ticket y del diseño en pantallas angostas.</li>
+              <li>GitHub Actions corre las pruebas de la API y de la app, y <code>flutter analyze</code>, con cada <code>git push</code>.</li>
+            </ul>
+          </article>
+
+          <article class="cs-section" id="participacion">
+            <h2 data-reveal="title">Mi participación.</h2>
+            <ul class="points" data-reveal="list">
+              <li>Diseño de la base de datos con scripts T-SQL repetibles.</li>
+              <li>Desarrollo de la API en ASP.NET Core 8 con Clean Architecture, EF Core y JWT.</li>
+              <li>Desarrollo de la app en Flutter para macOS, Windows, Linux, web y Android.</li>
+              <li>Integración con impresoras térmicas, cajón de dinero y lector de código de barras.</li>
+              <li>Pruebas automatizadas e integración continua.</li>
+            </ul>
+            <div class="chips cs-chips">
+              <span class="chip">C#</span><span class="chip">ASP.NET Core 8</span><span class="chip">EF Core</span><span class="chip">SQL Server</span><span class="chip">T-SQL</span><span class="chip">Dart</span><span class="chip">Flutter</span><span class="chip">xUnit</span><span class="chip">GitHub Actions</span><span class="chip">ESC/POS</span>
+            </div>
+          </article>
+
+          <article class="cs-section" id="evidencias">
+            <h2 data-reveal="title">Capturas.</h2>
+            <p>El nombre y los datos del cliente se omiten por confidencialidad.</p>
+            <!-- TODO: reemplaza estos marcadores por capturas reales (<img src="../assets/img/projects/carniapp-pos.webp" alt="...">). -->
+            <div class="evidence-grid" data-reveal="list">
+              <div class="evidence wide">Punto de venta<br>próximamente</div>
+              <div class="evidence wide">Venta Fácil<br>próximamente</div>
+              <div class="evidence wide">Corte de caja<br>próximamente</div>
+            </div>
+          </article>
+
+          <a data-reveal="fade" class="next-case" href="multiapp.html">
+            <span><small>Siguiente proyecto</small><b>multiApp</b></span>
+            <svg class="icon"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer footer-slim">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>Aldahir Labs · Engineering ideas into reality</span>
+        <span>© <span data-year>2026</span> Aldahir Ballina</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
